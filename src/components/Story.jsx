@@ -1,28 +1,21 @@
-import { useState } from "react";
 import { MdOutlineDragHandle } from "react-icons/md";
 
 function Story(props) {
-  const [myStates, setMyStates] = useState({
-    complexity: props.complexity,
-    po: props.po,
-    status: props.status,
-  });
-
-  function handleChange(event) {
-    setMyStates((prevState) => {
-      return {
-        ...prevState,
-        [event.target.name]: event.target.value,
-      };
-    });
-  }
-
   return (
-    <div className="flex p-2 m-2 bg-gray-200 border-2 border-black border-solid w-wit">
-      <p className="flex-auto">{props.priority}</p>
-      <p className="flex-auto">As {props.as}</p>
-      <p className="flex-auto">{props.want}</p>
-      <select name="complexity" id="complexity" value={myStates.complexity} onChange={handleChange}>
+    <div
+      id={props.priority}
+      className="flex items-center p-2 m-2 border-2 border-black border-solid"
+    >
+      <p className="flex-grow-0 flex-shrink-0 align-center basis-1/12">{props.priority}</p>
+      <p className="flex-grow-0 flex-shrink-0 basis-1/4">As {props.as}</p>
+      <p className="flex-grow-0 flex-shrink-0 basis-1/4">{props.want}</p>
+      <select
+        className="w-1/12 "
+        name="complexity"
+        id="complexity"
+        value={props.complexity}
+        onChange={props.onChange}
+      >
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -36,7 +29,7 @@ function Story(props) {
         <option value="144">144</option>
         <option value="233">233</option>
       </select>
-      <select name="po" id="po" value={myStates.po} onChange={handleChange}>
+      <select className=" basis-1/4" name="po" id="po" value={props.po} onChange={props.onChange}>
         <option value="unseen">Unseen</option>
         <option value="prioritize">Prioritize</option>
         <option value="de-prioritize">De-prioritize</option>
@@ -44,15 +37,33 @@ function Story(props) {
         <option value="complex-ify">Complex-ify</option>
         <option value="de-complex">De-complex</option>
       </select>
-      <select name="status" id="status" value={myStates.status} onChange={handleChange}>
-        <option value="doing">Doing</option>
-        <option value="next">Next</option>
-        <option value="later">Later</option>
-        <option value="future">Future</option>
-        <option value="waiting">Waiting</option>
-        <option value="future">Future</option>
+      <select
+        className="basis-1/4"
+        name="status"
+        id="status"
+        value={props.status}
+        onChange={props.onChange}
+      >
+        <option className="text-center" value="doing">
+          Doing
+        </option>
+        <option className="text-center" value="next">
+          Next
+        </option>
+        <option className="text-center" value="later">
+          Later
+        </option>
+        <option className="text-center" value="future">
+          Future
+        </option>
+        <option className="text-center" value="waiting">
+          Waiting
+        </option>
+        <option className="text-center" value="future">
+          Future
+        </option>
       </select>
-      <MdOutlineDragHandle draggable className="text-4xl" />
+      <MdOutlineDragHandle className="text-6xl basis-1/12" />
     </div>
   );
 }
