@@ -5,6 +5,7 @@
 *.sublime-workspace
 *.swo
 *.swp
+*firebaseConfig.js
 *~
 .DS_STORE
 .env
@@ -15,6 +16,7 @@
 .vscode
 /.firebase
 /.firebaserc
+/ignore
 _SpecRunner.html
 __benchmarks__
 build/

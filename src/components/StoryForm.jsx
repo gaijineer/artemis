@@ -1,20 +1,21 @@
-import { MdOutlineDeleteForever, MdSave } from "react-icons/md";
+import { FaPlus, FaTrash, FaSave } from "react-icons/fa";
 
 function StoryForm(props) {
   const id = props.id;
   return (
     <form
-      className={"mx-auto my-5 " + props.bgColor}
-      key={props._id}
-      id={props._id}
+      className={"rounded-t-3xl mx-auto my-5 p-2 " + props.bgColor}
+      key={props.id}
+      id={props.id}
       onSubmit={(event) => {
         event.preventDefault();
-        props.onSubmit(props._id);
+        props.onSubmit(props.id);
       }}
     >
       <div className="flex items-center justify-around w-full p-2 m-2 border-black border-solid">
         <input
           type="number"
+          placeholder="Priority"
           name="priority"
           className="min-w-0 p-2 grow-0 shrink basis-1/12"
           onChange={props.onChange}
@@ -22,18 +23,20 @@ function StoryForm(props) {
         />
         <input
           type="text"
-          name="as"
+          placeholder="As a..."
+          name="role"
           className="min-w-0 p-2 grow-0 shrink basis-1/6"
           onChange={props.onChange}
-          value={props.as}
+          value={props.role}
         />
         <input
           required
+          placeholder="I want to..."
           className="min-w-0 p-2 grow-0 shrink basis-1/3"
-          name="want"
+          name="title"
           type="text"
           onChange={props.onChange}
-          value={props.want}
+          value={props.title}
         />
         <select
           className="p-2 grow-0 shrink basis-1/12"
@@ -42,6 +45,7 @@ function StoryForm(props) {
           onChange={props.onChange}
           value={props.complexity}
         >
+          <option value="0">Complexity</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -63,64 +67,77 @@ function StoryForm(props) {
         </select>
         <select
           className="p-2 grow-0 shrink basis-1/12"
-          name="po"
-          id="po"
+          name="poStat"
+          id="poStat"
           onChange={props.onChange}
-          value={props.po}
+          value={props.poStat}
         >
           <option value="unseen">Unseen</option>
           <option value="priorityUp">Prioritize</option>
           <option value="priorityDown">De-prioritize</option>
           <option value="ok">OK</option>
-          <option value="complexityUp">Complex-ify</option>
-          <option value="complexityDown">De-complex</option>
+          <option value="complexityUp">Complexity ↓</option>
+          <option value="complexityDown">Complexity ↑</option>
+          <option value="complexityDown">Done</option>
         </select>
         <select
           className="p-2 grow-0 shrink basis-1/12"
-          name="status"
-          id="status"
+          name="storyStat"
+          id="storyStat"
           onChange={props.onChange}
-          defaultValue={props.status}
+          defaultValue={props.storyStat}
         >
+          <option className="text-center" value="new">
+            New
+          </option>
           <option className="text-center" value="wip">
-            Doing
+            WIP
           </option>
           <option className="text-center" value="next">
-            Next
+            Will do next
           </option>
           <option className="text-center" value="later">
-            Later
+            Will do later
           </option>
           <option className="text-center" value="future">
-            Future
-          </option>
-          <option className="text-center" value="help">
-            Waiting
+            Will do in future
           </option>
           <option className="text-center" value="waiting">
-            Future
+            Waiting
+          </option>
+          <option className="text-center" value="help">
+            Help
+          </option>
+          <option className="text-center" value="wtf">
+            WTF
+          </option>
+          <option className="text-center" value="done">
+            Done
           </option>
         </select>
 
-        <button type="submit" className="min-w-0 text-4xl grow-0 shrink max-w-min">
-          <MdSave />
+        <button type="submit" className="min-w-0 text-3xl grow-0 shrink max-w-min">
+          {props.isStoryAdder ? <FaPlus /> : <FaSave />}
         </button>
-        <button
-          type="button"
-          onClick={() => {
-            props.onClick(props._id);
-          }}
-          className="text-4xl grow-0 shrink max-w-min"
-        >
-          <MdOutlineDeleteForever />
-        </button>
+        {props.isStoryAdder ? null : (
+          <button
+            type="button"
+            onClick={() => {
+              props.onClick(props.id);
+            }}
+            className="text-3xl grow-0 shrink max-w-min"
+          >
+            <FaTrash />
+          </button>
+        )}
       </div>
       <textarea
-        className="w-full p-2 m-2"
+        className="w-full p-3 m-2 bg-gray-100"
         rows="3"
-        name="dev"
+        name="devDetail"
         form={props.id}
-        value={props.dev}
+        value={props.devDetail}
+        placeholder="Development details..."
         onChange={props.onChange}
       ></textarea>
     </form>

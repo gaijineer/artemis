@@ -2,12 +2,15 @@ import StoryForm from "./StoryForm";
 
 function StoryAdder(props) {
   return (
-    <StoryForm
-      onChange={props.onChange}
-      onSubmit={props.onSubmit}
-      onClick={() => {}}
-      {...props.newStory}
-    />
+    <div>
+      <StoryForm
+        isStoryAdder={true}
+        onChange={props.onChange}
+        onSubmit={props.onSubmit}
+        onClick={() => {}}
+        {...props.newStory}
+      />
+    </div>
   );
 }
 
